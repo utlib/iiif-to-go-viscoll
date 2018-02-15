@@ -19,7 +19,8 @@ Vagrant.configure("2") do |config|
   # Set up 
   config.vm.provision "shell", path: "setup/boot.sh"
   
-  # Install Mongo
+  # Install Mongo and add seed
+  config.vm.provision "file", source: "mongo-seed", destination: "/tmp/mongo-seed"
   config.vm.provision "shell", path: "setup/mongo.sh"
   
   # Install Node.js
@@ -44,10 +45,15 @@ Vagrant.configure("2") do |config|
   SHELL
   
   # Start Viscoll (Run on start)
+  config.vm.provision "shell", run: 'always', inline: <<-SHELL
+	service mongod start
+  SHELL
   config.vm.provision "shell", run: 'always', privileged: false, inline: <<-SHELL
 	mount --bind /home/vagrant/viscoll_node_modules /home/vagrant/ViscollObns/viscoll-app/node_modules
 	mount --bind /home/vagrant/viscoll_uploads /home/vagrant/ViscollObns/viscoll-api/uploads
-	service mongod start
 	viscoll start
   SHELL
+  
+  # Done message
+  config.vm.post_up_message = "Viscoll to Go is ready! Visit localhost:3000 on your browser to get started (default credentials: user@viscoll.com / goviscoll). If you wish to create new accounts, please visit localhost:1080 to catch the simulated confirmation email."
 end

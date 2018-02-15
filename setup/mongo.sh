@@ -8,3 +8,9 @@ mkdir -p /data/db
 
 # Install
 apt-get install -y mongodb-org
+
+# Import seed
+service mongod start
+mongorestore /tmp/mongo-seed
+rm -Rf /tmp/mongo-seed
+service mongod stop
