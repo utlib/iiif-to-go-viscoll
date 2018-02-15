@@ -1,0 +1,68 @@
+#!/bin/bash --login
+
+projectdir=~/ViscollObns
+logdir=/var/log/viscoll
+pushd "$projectdir" > /dev/null
+
+case "$1" in
+"start")
+        echo "Starting Viscoll API..."
+        cd viscoll-api
+        bundle install
+        rails s -p 3001 -b 0.0.0.0 > /dev/null &
+        echo "Starting MailCatcher..."
+        mailcatcher --http-ip 0.0.0.0
+        echo "Starting Viscoll App..."
+        cd ../viscoll-app
+        HOST='0.0.0.0' PORT=3000 nohup npm start > "${logdir}/app.log" &
+        echo "OK."
+        ;;
+"stop")
+        echo "Stopping Viscoll API..."
+        kill -9 $(cat viscoll-api/tmp/pids/server.pid)
+        echo "Stopping MailCatcher"
+        pkill ruby
+        echo "Stopping Viscoll App..."
+        pkill npm
+        pkill node
+        pkill react-scripts
+        echo "OK."
+        ;;
+"test")
+        cd viscoll-api
+        rspec
+        cd ../viscoll-app
+        npm test
+        ;;
+"test-api")
+        cd viscoll-api
+        rspec
+        ;;
+"test-app")
+        cd viscoll-app
+        npm test
+        ;;
+"autotest-api")
+        cd viscoll-api
+        guard
+        ;;
+"autotest-app")
+        cd viscoll-app
+        npm test -- --watch
+        ;;
+"log")
+        tail -f "${projectdir}/viscoll-api/log/development.log"
+        ;;
+"log-api")
+        tail -f "${projectdir}/viscoll-api/log/development.log"
+        ;;
+
+"log-app")
+        tail -f "${logdir}/app.log"
+        ;;
+*)
+        echo "viscoll start|stop|test|test-api|test-app|autotest-api|autotest-app|log|log-api|log-app"
+        ;;
+esac
+
+popd > /dev/null
