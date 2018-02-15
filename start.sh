@@ -1,6 +1,7 @@
 #!/bin/bash
-url="http://127.0.0.1:8080"
+url="http://localhost:3000"
 vagrant up || exit 127
+sleep 5
 if [ ! -z `which xdg-open` ]; then
 	xdg-open "$url"
 elif [ ! -z `which open` ]; then
