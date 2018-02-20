@@ -47,11 +47,11 @@ Vagrant.configure("2") do |config|
   # Start Viscoll (Run on start)
   config.vm.provision "shell", run: 'always', inline: <<-SHELL
 	service mongod start
-  SHELL
-  config.vm.provision "shell", run: 'always', privileged: false, inline: <<-SHELL
 	mount --bind /home/vagrant/viscoll_node_modules /home/vagrant/ViscollObns/viscoll-app/node_modules
 	mount --bind /home/vagrant/viscoll_uploads /home/vagrant/ViscollObns/viscoll-api/uploads
-	viscoll start
+  SHELL
+  config.vm.provision "shell", run: 'always', privileged: false, inline: <<-SHELL
+	viscoll start >/dev/null
   SHELL
   
   # Done message
