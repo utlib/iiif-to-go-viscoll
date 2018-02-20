@@ -31,7 +31,7 @@ If installation is successful, a browser window should appear showing Viscoll.
 
 ## Usage
 
-To begin, simply run `start.bat` for Windows, `start.command` for Mac OS X, or `start.sh` for Ubuntu. The box should start up within a minute. When it is done starting up, a browser window should appear showing Viscoll at `http://localhost:3000`. The default login credentials are `user@viscoll.com / goviscoll`.
+To begin, simply run `start.bat` for Windows, `start.command` for Mac OS X, or `start.sh` for Ubuntu. The box should start up within a minute. When it is done starting up, a browser window should appear showing Viscoll at `http://localhost:3000`. The default login credentials are `user@viscoll.com / goviscoll`. If you sign up additional users, you must visit `http://localhost:1080` to access the simulated confirmation email required for activating their accounts.
 
 To end, simply run `stop.bat` for Windows, `stop.command` for Mac OS X, or `stop.sh` for Ubuntu.
 
