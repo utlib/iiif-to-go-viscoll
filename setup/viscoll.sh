@@ -19,16 +19,7 @@ bundle install --quiet >/dev/null
 if [ ! -d /home/vagrant/ViscollObns/viscoll-api/uploads ]; then
 	mkdir /home/vagrant/ViscollObns/viscoll-api/uploads
 fi
-if [ ! -d /home/vagrant/viscoll_uploads ]; then
-	mkdir /home/vagrant/viscoll_uploads
-fi
 
 # Set up front-end app
 cd /home/vagrant/ViscollObns/viscoll-app
-if [ ! -d node_modules ]; then
-	mkdir node_modules
-fi
-if [ ! -d /home/vagrant/viscoll_node_modules ]; then
-	mkdir /home/vagrant/viscoll_node_modules
-fi
 npm install --silent >/dev/null
