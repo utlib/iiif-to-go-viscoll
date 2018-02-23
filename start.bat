@@ -1,3 +1,3 @@
 @echo off
 
-vagrant up && sleep 5 && start "" "http://localhost:3000"
+vagrant up && sleep 20 && start "" "http://localhost:3000"
