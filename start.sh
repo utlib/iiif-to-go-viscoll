@@ -1,5 +1,5 @@
 #!/bin/bash
-url="http://localhost:3000"
+url="`dirname $0`/splash/index.html"
 vagrant up || exit 127
 sleep 20
 if [ ! -z `which xdg-open` ]; then
