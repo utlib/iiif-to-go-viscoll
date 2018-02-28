@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
 	service mongod start
   SHELL
   config.vm.provision "shell", run: 'always', privileged: false, inline: <<-SHELL
-	viscoll start >/dev/null
+	viscoll start > /dev/null 2>&1
   SHELL
   
   # Done message

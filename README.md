@@ -39,7 +39,7 @@ To begin, simply run `start.bat` for Windows, `start.command` for Mac OS X, or `
 
 To end, simply run `stop.bat` for Windows, `stop.command` for Mac OS X, or `stop.sh` for Ubuntu.
 
-*Command Line Usage: You can also start VisColl in a Box using `vagrant up` and shut it down using `vagrant halt`.*
+*Command Line Usage: You can also start VisColl in a Box using `vagrant up` and shut it down using `vagrant halt`. If you wish to see diagnostic output while the box is starting up, run `vagrant up --debug`.*
 
 ## Uninstallation
 
