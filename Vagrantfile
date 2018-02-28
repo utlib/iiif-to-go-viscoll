@@ -23,6 +23,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "mongo-seed", destination: "/tmp/mongo-seed"
   config.vm.provision "shell", path: "setup/mongo.sh"
   
+  # Install Apache as springboard for front-end app
+  config.vm.provision "shell", path: "setup/apache.sh"
+
   # Install Node.js
   config.vm.provision "shell", path: "setup/nodejs.sh"
   
@@ -35,7 +38,7 @@ Vagrant.configure("2") do |config|
 	config.vm.provision "file", source: "ViscollObns", destination: "/home/vagrant/ViscollObns"
   end
   config.vm.provision "shell", inline: 'mkdir /var/log/viscoll && chown vagrant:vagrant /var/log/viscoll'
-  config.vm.provision "shell", privileged: false, path: "setup/viscoll.sh"
+  config.vm.provision "shell", path: "setup/viscoll.sh"
   
   # Add viscoll dev tool
   config.vm.provision "file", source: "opt-tools/viscoll", destination: "/tmp/viscoll"

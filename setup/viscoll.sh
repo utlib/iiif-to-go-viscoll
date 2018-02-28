@@ -23,4 +23,25 @@ fi
 # Set up front-end app
 cd /home/vagrant/ViscollObns/viscoll-app
 npm install --silent > /dev/null 2>&1
-npm build --silent > /dev/null 2>&1
+sed -i "3 s/\/api/http:\/\/localhost:3001/" ./src/store/axiosConfig.js
+npm run build --silent > /dev/null 2>&1
+mkdir -p /var/www/viscoll
+cp -R /home/vagrant/ViscollObns/viscoll-app/build/* /var/www/viscoll/
+cp -R /home/vagrant/ViscollObns/viscoll-app/node_modules /var/www/viscoll/
+
+# Front-end app Apache integration
+cd /etc/apache2
+echo 'Listen *:3000' >> ports.conf
+echo '
+<VirtualHost *:3000>
+  DocumentRoot /var/www/viscoll
+  # Serve static files like the minified javascript from npm run-script build
+  Alias /static /var/www/viscoll/static
+  <Directory /var/www/viscoll/static>
+    Require all granted
+  </Directory>
+</VirtualHost>
+' > sites-available/viscoll.conf
+a2enmod headers > /dev/null
+a2ensite viscoll > /dev/null
+service apache2 restart > /dev/null
