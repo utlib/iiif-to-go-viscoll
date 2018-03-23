@@ -1,5 +1,5 @@
 #!/bin/bash
-url="`dirname "$0"`/splash/index.html"
+url="http://127.0.0.1:3002"
 vagrant up || exit 127
 if [ ! -z `which xdg-open` ]; then
 	xdg-open "$url" > /dev/null 2>&1

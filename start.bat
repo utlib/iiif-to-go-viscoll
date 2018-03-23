@@ -1,3 +1,3 @@
 @echo off
 
-vagrant up && start "" "%~dp0\splash\index.html"
+vagrant up && start "" "http://127.0.0.1:3002"

@@ -8,6 +8,7 @@ Vagrant.configure("2") do |config|
   # Forwarded ports
   config.vm.network "forwarded_port", guest: 3000, host: 3000
   config.vm.network "forwarded_port", guest: 3001, host: 3001
+  config.vm.network "forwarded_port", guest: 80, host:3002
   config.vm.network "forwarded_port", guest: 1080, host: 1080
   
   # VirtualBox settings
@@ -45,6 +46,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
 	mv /tmp/viscoll /usr/local/bin/viscoll
 	chmod +x /usr/local/bin/viscoll
+  SHELL
+  
+  # Add splash
+  config.vm.provision "file", run: 'always', source: "splash", destination: "/home/vagrant/splash"
+  config.vm.provision "shell", run: 'always', inline: <<-SHELL
+	rm -Rf /var/www/html
+	mv /home/vagrant/splash /var/www/html
   SHELL
   
   # Start Viscoll (Run on start)
