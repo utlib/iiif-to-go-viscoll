@@ -7,7 +7,8 @@ echo "IIIF in a Box: Preparing Viscoll..."
 cd /home/vagrant
 if [ ! -d ViscollObns ]; then
 	echo "Provisioning from repository..."
-	git clone -q git@git.library.utoronto.ca:digitaltoolsmss/ViscollObns.git
+	git clone -q https://github.com/utlib/VisualCollation.git ViscollObns
+	chown -R vagrant:vagrant ViscollObns
 fi
 
 # Set up API
