@@ -4,6 +4,9 @@
 # Vagrant configuration header: DO NOT CHANGE
 Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-16.04"
+  
+  # Uncomment this line when packaging the box!
+  # config.ssh.insert_key = false
 
   # Forwarded ports
   config.vm.network "forwarded_port", guest: 3000, host: 3000
