@@ -8,7 +8,6 @@ cd /home/vagrant
 if [ ! -d ViscollObns ]; then
 	echo "Provisioning from repository..."
 	git clone -q https://github.com/utlib/VisualCollation.git ViscollObns
-	chown -R vagrant:vagrant ViscollObns
 fi
 
 # Set up API
@@ -29,6 +28,9 @@ npm run build --silent > /dev/null 2>&1
 mkdir -p /var/www/viscoll
 cp -R /home/vagrant/ViscollObns/viscoll-app/build/* /var/www/viscoll/
 cp -R /home/vagrant/ViscollObns/viscoll-app/node_modules /var/www/viscoll/
+
+# Set permissions
+chown -R vagrant:vagrant /home/vagrant/ViscollObns
 
 # Front-end app Apache integration
 cd /etc/apache2
